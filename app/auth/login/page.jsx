@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const Page = () => {
 
     
 
@@ -11,4 +11,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
