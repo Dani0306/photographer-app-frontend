@@ -7,7 +7,36 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+	animation: {
+		float: 'float 2s ease-in-out infinite',
+		"marquee": "marquee var(--marquee-duration) linear infinite",
+        "fade-in": "fade-in 0.5s linear forwards",
+        flashing: "flasing 1.4s infinite linear"
+	},
   	extend: {
+		keyframes: {
+			"fade-in": {
+          from: {
+            opacity: "0"
+          }, 
+          to :{
+            opacity: "1"
+          }
+        },
+        marquee: {
+          "100%": {
+            transform: "translateY(-50%)"
+          }
+        },
+        flashing: {
+          "05, 100%": { opacity: "0.2" },
+          "20%": { opacity: "1" }
+        },
+		float: {
+			'0%, 100%': { transform: 'translateY(0)' },
+			'50%': { transform: 'translateY(-10px)' },
+		  },			
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -59,3 +88,4 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
 };
+

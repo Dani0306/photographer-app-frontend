@@ -78,3 +78,14 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.fadeInX {
+  transform: translateX(0);
+  opacity: 1
+}
+
+.fadeInY {
+  transform: translateY(0px);
+  opacity: 1
+}

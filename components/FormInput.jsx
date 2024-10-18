@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/form"
   import { Input } from "@/components/ui/input"
 
-const FormInput = ({ form, name, type = "text", label }) => {
+const FormInput = ({ form, name, placeholder, type = "text", label }) => {
   return (
     <FormField
           control={form.control}
@@ -17,7 +17,7 @@ const FormInput = ({ form, name, type = "text", label }) => {
             <FormItem>
               <FormLabel>{label}</FormLabel>
               <FormControl>
-                <Input type={type} placeholder="shadcn" {...field} />
+                <Input type={type} placeholder={placeholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
