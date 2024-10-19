@@ -26,7 +26,7 @@ const CarouselSection = () => {
       onMouseLeave={plugin.current.reset}
     >
       <div className="absolute inset-0 z-[10] bg-black opacity-50" />
-      <h1 className='left-1/2 z-[50] top-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute px-6 lg:px-0 text-center font-bold text-5xl lg:text-7xl text-white text-wrap leading-[1.2] lg:leading-none'>
+      <h1 className='left-1/2 z-[50] top-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute px-6 lg:px-0 text-center font-bold text-5xl lg:text-5xl xl:text-7xl text-white text-wrap leading-[1.2] lg:leading-none'>
           Encuentra el fotógrafo <br/> perfecto para cada ocasión.
       </h1>
       <CarouselContent>

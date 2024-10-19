@@ -2,20 +2,13 @@
 
 import React from 'react'
 import { Button } from './ui/button'
-import { useInView } from 'react-intersection-observer'
-import { cn } from '@/lib/utils'
 import { Info } from 'lucide-react';
 
 const Footer = () => {
 
-  const { ref, inView } = useInView({
-    triggerOnce: false, 
-    threshold: 0.25
-  })
-
   return (
-    <footer ref={ref} className='w-full mt-[100px] pb-[40px]'>
-        <div className={cn("w-full flex flex-col items-center opacity-0 transition-all duration-1000 space-y-8 px-4", inView && "opacity-100")}>
+    <footer className='w-full mt-[100px] pb-[40px]'>
+        <div className="w-full flex flex-col items-center space-y-8 px-4">
           <div className='flex w-full lg:w-[80%] item-center justify-between'>
             <h3 className='text-xl font-bold lg:text-4xl'>Síguenos!</h3>
             <Button className="flex items-center justify-evenly" variant="default">

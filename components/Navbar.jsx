@@ -76,7 +76,7 @@ const Navbar = ({ user }) => {
         <ul
           className={cn(
             "hidden lg:flex w-max h-full items-center space-x-6",
-            pathname === "/" ? "text-white" : "text-black"
+            isScrolled ? "text-white" : "text-black"
           )}
         >
           {!user?.ubicacion && (
@@ -104,19 +104,19 @@ const Navbar = ({ user }) => {
               <div
                 className={cn(
                   "w-[20px] h-[2px] mb-[2px] transition-[transform] border-none duration-500",
-                  pathname === "/" ? "bg-white" : "bg-black"
+                  isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
               <div
                 className={cn(
                   "w-[20px] h-[2px] my-[2px] transition-[transform] border-none duration-500",
-                  pathname === "/" ? "bg-white" : "bg-black"
+                  isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
               <div
                 className={cn(
                   "w-[20px] h-[2px] bg-black mt-[2px] transition-[transform] border-none translate-y-0 duration-500",
-                  pathname === "/" ? "bg-white" : "bg-black"
+                  isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
             </button>
