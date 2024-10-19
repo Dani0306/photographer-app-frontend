@@ -56,17 +56,19 @@ const Navbar = ({ user }) => {
         className={`w-full ${isScrolled && "bg-black text-white"} transition-all duration-500 h-full flex items-center justify-between px-4 md:px-6 lg:px-12`}
       >
         {/* Logo */}
-        <img
-          src="/logofotografia.png"
-          alt="Logo"
-          className="w-[50px] h-[50px] object-cover"
-        />
+        <Link href="/">
+          <img
+            src="/logofotografia.png"
+            alt="Logo"
+            className="w-[50px] h-[50px] object-cover"
+          />
+        </Link>
 
         {/* Site Name */}
         <h2
           className={cn(
             "lg:hidden",
-            pathname === "/" ? "text-white" : "text-black"
+            isScrolled ? "text-white" : "text-black"
           )}
         >
           Fotografía Profesional
