@@ -51,7 +51,7 @@ const Navbar = ({ user }) => {
   };
 
   return (
-    <nav className="w-full mx-auto fixed left-0 top-0 h-[9vh] bg-transparent z-[100]">
+    <nav className="w-full mx-auto fixed left-0 top-0 h-[10vh] bg-transparent z-[100]">
       <div
         className={`w-full ${isScrolled && "bg-black text-white"} transition-all duration-500 h-full flex items-center justify-between px-4 md:px-6 lg:px-12`}
       >
