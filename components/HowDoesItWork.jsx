@@ -14,7 +14,7 @@ const HowDoesItWork = () => {
     
   return (
     <section id='proccess' ref={ref} className='w-full my-[100px] px-4 flex flex-col items-center justify-center'>
-        <h2 className={cn("font-bold text-4xl my-20 md:text-5xl text-center opacity-0 translate-x-[100px] transition-all duration-1000 lg:text-6xl", inView && "fadeInX")}>¿Cómo funciona?</h2>
+        <h2 className={cn("font-bold text-4xl my-20 md:text-5xl text-center opacity-0 translate-x-[100px] transition-all duration-1000 lg:text-5xl xl:text-6xl", inView && "fadeInX")}>¿Cómo funciona?</h2>
         <div className='flex flex-col w-full items-center lg:flex-row lg:justify-center lg:space-x-6 max-w-full'>
             <div className={cn("w-full md:w-[70%] space-y-6 lg:max-w-[45%] flex flex-col items-center opacity-0 translate-x-[-100px] transition-all duration-1000 justify-center", inView && "fadeInX")}>
                 <div className='w-full h-max flex items-center justify-between px-4'>

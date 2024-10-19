@@ -43,7 +43,7 @@ import {
   
     return (
       <section id="services" ref={ref} className='w-full px-4 mt-[100px] lg:min-h-[90vh] flex flex-col items-center justify-center'>
-           <h2 className={cn("font-bold text-4xl md:text-5xl text-center lg:text-6xl opacity-0 translate-x-[-150px] transition-all duration-1000", inView && "fadeInX")}>
+           <h2 className={cn("font-bold text-4xl md:text-5xl text-center lg:text-5xl xl:text-6xl opacity-0 translate-x-[-150px] transition-all duration-1000", inView && "fadeInX")}>
              Servicios de <span className='text-blue-600'>Fotografía</span> disponibles
            </h2>
            <p className={cn("text-base lg:text-xl font-light mt-10 max-w-[600px] lg:max-w-[700px] text-gray-950 px-6 lg:px-0 text-center text-wrap opacity-0 translate-x-[100px] transition-all duration-1000", inView && "fadeInX")}>

@@ -81,7 +81,7 @@ const Galery = () => {
 
   return (
     <div ref={ref} className="w-full my-[100px] px-4 flex flex-col items-center justify-center relative max-w-[5xl]">
-        <h2 className={cn("font-bold text-4xl my-20 md:text-5xl text-center opacity-0 translate-x-[100px] transition-all duration-1000 lg:text-6xl", inView && "fadeInX")}>Conóce <span className="text-blue-600">Nuestro</span> Trabajo</h2>
+        <h2 className={cn("font-bold text-4xl my-20 md:text-5xl text-center opacity-0 translate-x-[100px] transition-all duration-1000 lg:text-5xl xl:text-6xl", inView && "fadeInX")}>Conóce <span className="text-blue-600">Nuestro</span> Trabajo</h2>
       <ReviewGrid />
     </div>
   )
