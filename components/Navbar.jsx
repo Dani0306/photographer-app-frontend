@@ -57,7 +57,7 @@ const Navbar = ({ user }) => {
       >
         {/* Logo */}
         <img
-          src="/logoFotografia.png"
+          src="/logofotografia.png"
           alt="Logo"
           className="w-[50px] h-[50px] object-cover"
         />
