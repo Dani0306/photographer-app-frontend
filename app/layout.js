@@ -31,8 +31,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body>
         <main className="flex flex-col overflow-x-hidden">
-          <Navbar user={userCookie?.value?.user}/>
                 <Providers>
+                  <Navbar user={loggedInUser?.data?.user}/>
                   {children}                  
                 </Providers> 
                <Footer/>

@@ -19,7 +19,6 @@ const Navbar = ({ user }) => {
       setIsScrolled(window.scrollY > 0);
     };
 
-    console.log(window.scrollY)
 
     window.addEventListener("scroll", handleScroll);
 
@@ -28,34 +27,28 @@ const Navbar = ({ user }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(window.scrollY)
-    console.log(isScrolled)
-  }, [isScrolled])
-
   const router = useRouter();
   const pathname = usePathname();
 
-  // Mutation for logging out
-  // const { mutate: logout } = useMutation({
-  //   mutationKey: ["logout"],
-  //   mutationFn: serverLogout,
-  //   onSuccess: () => {
-  //     toast({
-  //       title: "Session cerrada correctamente ✅.",
-  //       description: "Tu session ha sido cerrada de manera segura.",
-  //       variant: "default",
-  //     });
-  //     router.refresh();
-  //   },
-  //   onError: () => {
-  //     console.log("Error during logout");
-  //   },
-  // });
+  const { mutate: logout } = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: serverLogout,
+    onSuccess: () => {
+      toast({
+        title: "Session cerrada correctamente ✅.",
+        description: "Tu session ha sido cerrada de manera segura.",
+        variant: "default",
+      });
+      router.refresh();
+    },
+    onError: () => {
+      console.log("Error during logout");
+    },
+  });
 
-  // const handleClick = () => {
-  //   logout();
-  // };
+  const handleClick = () => {
+    logout();
+  };
 
   return (
     <nav className="w-full mx-auto fixed left-0 top-0 h-[9vh] bg-transparent z-[100]">
@@ -135,7 +128,7 @@ const Navbar = ({ user }) => {
               {user && (
                 <div className="w-[90%] mx-auto flex flex-col items-end mt-10">
                   <Avatar className="w-[60px] h-[60px] my-3">
-                    <AvatarImage src="https://via.placeholder.com/60" />
+                    <AvatarImage src="https://github.com/shadcn.png" />
                     <AvatarFallback>{user?.nombre}</AvatarFallback>
                   </Avatar>
                   <strong>{user?.nombre}</strong>
