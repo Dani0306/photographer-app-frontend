@@ -59,7 +59,7 @@ import {
                       {item.title}
                     </h1>
                     <img 
-                      className='w-full h-full rounded-xl object-cover' 
+                      className='w-full h-full md:w-[80%] md:h-[80%] xl:w-full xl:h-full rounded-xl object-cover' 
                       src={item.image} 
                       alt="image" 
                     />

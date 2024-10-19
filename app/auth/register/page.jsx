@@ -69,7 +69,7 @@ const Page = () => {
   }
 
   return (
-    <div className="w-full mt-[5vh] flex flex-col lg:flex-row-reverse pt-14 bg-gray-100 min-h-[90vh]">
+    <div className="w-full mt-[5vh] flex flex-col lg:flex-row-reverse pt-14 min-h-[90vh]">
       <div className="w-full flex pt-20 flex-col items-center lg:w-[65%]">
         <h1 className="text-4xl md:text-6xl mb-4 font-bold text-black">Regístrate</h1>
         <p className="text-base lg:text-xl font-light mt-10 mb-16 max-w-[600px] lg:max-w-[700px] text-gray-950 px-6 lg:px-0 text-center text-wrap">
