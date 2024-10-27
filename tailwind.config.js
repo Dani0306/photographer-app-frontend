@@ -14,6 +14,9 @@ module.exports = {
         flashing: "flasing 1.4s infinite linear"
 	},
   	extend: {
+		gridTemplateColumns: {
+			'auto-fill': 'repeat(auto-fill, minmax(150px, 1fr))',
+		  },
 		keyframes: {
 			"fade-in": {
           from: {

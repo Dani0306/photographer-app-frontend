@@ -1,16 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form"
 import { useState } from 'react'
 import Link from "next/link"
-
-import { Button } from "@/components/ui/button"
-import { Form } from "@/components/ui/form"
-import FormInput from "@/components/FormInput";
-import { useMutation } from "@tanstack/react-query";
-import { sendLoginPhotographerRequest, sendLoginUserRequest } from "../login/actions";
+import { AiFillFacebook as Facebook, AiFillGoogleCircle as Google, AiOutlineGithub as GitHub } from "react-icons/ai"
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation"
+import LoginButton from "@/components/LoginButton";
 
 const Page = () => {
 
@@ -18,41 +13,26 @@ const Page = () => {
 
   const router = useRouter();
 
+  const handleLogin = () => {
+    
+  }
+
   const handleChangeType = () => {
     if(type === "user") setType("photographer")
     else setType("user")
   }
 
-  const { mutate: createLoginRequest, isPending } = useMutation({
-    mutationKey: ["login"], 
-    mutationFn: type === "user" ? sendLoginUserRequest : sendLoginPhotographerRequest,
-    onSuccess: () => {
-      toast({
-        title: "Inicio de sesión exitoso ✅",
-        description: "Seras redirigido a nuestra pagina principal.",
-        variant: "default"
-      })
-      router.push("/")
-    },
-    onError: () => {
-      toast({
-        title: "Usuario o contraseña incorrect@.",
-        description: "Ya tienes cuenta? inicia sesión.",
-        variant: "destructive"
-      })
-    }
-  })
 
-  const form = useForm({
-    defaultValues: {
-      email: "", 
-      contraseña: ""
-    }
-  })
+  // const form = useForm({
+  //   defaultValues: {
+  //     email: "", 
+  //     contraseña: ""
+  //   }
+  // })
 
-  function onSubmit (values){
-    createLoginRequest(values)
-  }
+  // function onSubmit (values){
+  //   createLoginRequest(values)
+  // }
 
   return (
     <div className="w-full mt-[5vh] flex flex-col lg:flex-row-reverse pt-14 min-h-[90vh]">
@@ -61,7 +41,33 @@ const Page = () => {
         <p className="text-base lg:text-xl font-light mt-10 mb-16 max-w-[600px] lg:max-w-[700px] text-gray-950 px-6 lg:px-0 text-center text-wrap">
           Crea una cuenta para unirte a nuestra plataforma y acceder a servicios de fotografía personalizados según tus necesidades.
         </p>
-          <Form className="" {...form}>
+
+        <div className='w-[90%] max-w-[320px] flex flex-col items-center justify-around mt-5'>
+            <div className='w-full flex items-ceneter justify-between py-4'>
+              <span className='text-blue-600 text-xs'>
+                {type === "photographer" ? "Ingresa como usuario" : "Ingreasa como fotográfo"}
+              </span>
+              <span className='text-blue-600 text-xs'>
+                <Link href="/auth/register">Regístrate</Link>
+                </span>
+            </div>
+            <LoginButton Icon={Google} provider="Google" className="border border-black text-black"/>
+            <LoginButton Icon={GitHub} provider="Github" className="text-white bg-[#000]"/>
+            <LoginButton Icon={Facebook} provider="Facebook" className="text-white bg-[#0000FF]"/>
+        </div>
+          
+      </div>
+        <img className="hidden self-center lg:flex h-[70vh] object-contain" src="/photographer.png" alt="register image" />
+    </div>
+  );
+  
+}
+
+export default Page
+
+
+
+{/* <Form className="" {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-[90%] md:w-[400px] mb-10">
             <div className="w-full flex items-center justify-between">
               <span onClick={handleChangeType} className="text-sm text-blue-600 hover:text-blue-900 cursor-pointer">Iniciar sesión como {type === "photographer" ? "Usuario" : "Fotógrafo"}</span>
@@ -93,12 +99,4 @@ const Page = () => {
                 
               </Button>
             </form>
-          </Form>
-      </div>
-        <img className="hidden self-center lg:flex h-[70vh] object-contain" src="/photographer.png" alt="register image" />
-    </div>
-  );
-  
-}
-
-export default Page
+          </Form> */}

@@ -10,7 +10,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
+
+  const user = null;
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Detects scroll position to toggle navbar background
@@ -168,14 +170,27 @@ const Navbar = ({ user }) => {
               <li className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400">
                 Sobre Nosotros
               </li>
+              {
+                user && user?.ubicacion && <>
+                <Link href="/dashboard">
+                  <li
+                    className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400">
+                    Dasboard
+                  </li>
+                </Link>   
+                </>
+              }
 
               {user ? (
+                <>
                 <li
-                  onClick={handleClick}
-                  className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400"
-                >
-                  Cerrar sesión
-                </li>
+                onClick={handleClick}
+                className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400"
+              >
+                Cerrar sesión
+              </li>         
+              </>
+              
               ) : (
                 <>
                   <Link href="/auth/login">

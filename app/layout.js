@@ -2,9 +2,10 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
-import axios from "axios";
-import { cookies } from "next/headers"
 import Footer from "@/components/Footer";
+// import SessionProvider from "@/components/SessionProvider";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,29 +14,17 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const userCookie = cookies().get("user")
-  const photographerCookie = cookies().get("photographer")
-  let loggedInUser = null;
-
-  if(userCookie){
-    const id = userCookie && JSON.parse(userCookie.value)?._id
-    loggedInUser = await axios.get(`${process.env.DATABASE_URL}/auth/${userCookie.name}/` + id)
-  } 
-
-  if(photographerCookie){
-    const id = photographerCookie && JSON.parse(photographerCookie.value)?._id
-    loggedInUser = await axios.get(`${process.env.DATABASE_URL}/auth/${photographerCookie.name}/` + id)
-  }
+  const session = await getServerSession(authOptions)
 
   return (
     <html lang="en">
       <body>
         <main className="flex flex-col overflow-x-hidden">
-                <Providers>
-                  <Navbar user={loggedInUser?.data?.user}/>
-                  {children}                  
-                </Providers> 
-               <Footer/>
+                  <Providers>
+                    <Navbar session={session}/>
+                    {children}                  
+                  </Providers> 
+                <Footer/>
         </main>
         <Toaster />
       </body>
