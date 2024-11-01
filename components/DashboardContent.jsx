@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,9 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-const DashboardContent = () => {
+
+const DashboardContent = ({ user }) => {
+  
   return (
 <div className="w-full mt-[10vh] min-h-[90vh] px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4">
+
     <Card className="w-full h-max md:col-span-2 lg:border border-black">
       <CardHeader>
         <CardTitle>Vista General</CardTitle>

@@ -2,25 +2,32 @@
 
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useMutation } from "@tanstack/react-query";
-import { serverLogout } from "./navbar/actions";
 import { useRouter, usePathname } from "next/navigation";
-import { toast } from "@/hooks/use-toast";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import { signOut } from "next-auth/react"
+import { IoClose } from "react-icons/io5";
 
-const Navbar = () => {
+const Navbar = ({ user, registeredUser }) => {
 
-  const user = null;
+  const router = useRouter();
+  const pathname = usePathname();
+
+
+  const logout = () => {
+    localStorage.removeItem("type")
+    signOut()
+    router.push("/")
+  }
+
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showPopup, setShowPopup] = useState(false)
 
   // Detects scroll position to toggle navbar background
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-
 
     window.addEventListener("scroll", handleScroll);
 
@@ -29,31 +36,50 @@ const Navbar = () => {
     };
   }, []);
 
-  const router = useRouter();
-  const pathname = usePathname();
+  useEffect(() => {
+    if(user && !registeredUser && localStorage.getItem("type") === "photographer" && pathname !== "/profile"){
+      const timer = setTimeout(() => {
+        setShowPopup(true)
+      }, 10000);
+      return () => clearTimeout(timer);      
+    }
+  }, [])
 
-  const { mutate: logout } = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: serverLogout,
-    onSuccess: () => {
-      toast({
-        title: "Session cerrada correctamente ✅.",
-        description: "Tu session ha sido cerrada de manera segura.",
-        variant: "default",
-      });
-      router.refresh();
-    },
-    onError: () => {
-      console.log("Error during logout");
-    },
-  });
 
-  const handleClick = () => {
-    logout();
-  };
 
   return (
     <nav className="w-full mx-auto fixed left-0 top-0 h-[10vh] bg-transparent z-[100]">
+
+{
+  showPopup && (
+    <div className="absolute w-full h-[100vh] z-[110] bg-black bg-opacity-50 flex items-center justify-center">
+      <div className={`w-[90%] h-[250px] md:w-[450px] bg-white rounded-xl p-8 md:p-8 flex flex-col relative justify-center 
+        transform transition duration-300 ease-out ${showPopup ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+        
+        <button onClick={() => setShowPopup(false)} className="absolute top-4 right-3">
+          <IoClose className="w-6 h-6"/>
+        </button>
+        
+        <h2 className="font-semibold text-base md:text-xl mb-4">Completa tu Perfil</h2>
+        <p className="text-sm md:text-base">
+          Completa tu perfil como fotógrafo para empezar a recibir reservas y servicios de tus clientes.
+        </p>
+        
+        <div className="flex space-x-4 w-full justify-center mt-7">
+          <button onClick={() => setShowPopup(false)} className="w-[150px] h-[35px] flex items-center justify-center border border-black rounded-xl">
+            Más tarde
+          </button>
+          <button onClick={() => setShowPopup(false)} className="w-[150px] h-[35px] flex items-center justify-center bg-blue-600 text-white rounded-xl">
+            <Link href="/profile">
+              Ir ahora <span className="ml-2">&rarr;</span>
+            </Link> 
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
       <div
         className={`w-full ${isScrolled && "bg-black text-white"} transition-all duration-500 h-full flex items-center justify-between px-4 md:px-6 lg:px-12`}
       >
@@ -131,12 +157,9 @@ const Navbar = () => {
             <ul className="w-full flex flex-col">
               {user && (
                 <div className="w-[90%] mx-auto flex flex-col items-end mt-10">
-                  <Avatar className="w-[60px] h-[60px] my-3">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>{user?.nombre}</AvatarFallback>
-                  </Avatar>
-                  <strong>{user?.nombre}</strong>
-                  <span>{user?.ubicacion ? "Fotógrafo" : "Usuario"}</span>
+                    <img src={user?.user?.image} className="w-[60px] h-[60px] rounded-full object-cover" alt="" />
+                  <strong>{user?.user?.name}</strong>
+                  <span>{localStorage.getItem("type") === "photographer" ? "Fotógrafo" : "Usuario"}</span>
                 </div>
               )}
 
@@ -184,7 +207,7 @@ const Navbar = () => {
               {user ? (
                 <>
                 <li
-                onClick={handleClick}
+                onClick={logout}
                 className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400"
               >
                 Cerrar sesión

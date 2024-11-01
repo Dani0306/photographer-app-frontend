@@ -89,3 +89,16 @@ body {
   transform: translateY(0px);
   opacity: 1
 }
+
+
+.grilla {
+  display: grid;
+  grid-template-columns: 35% 65%;
+}
+
+@media only screen and (max-width: 768px) {
+  .grilla {
+    grid-template-rows: 30% 70%;
+    grid-template-columns: auto;
+  }
+}

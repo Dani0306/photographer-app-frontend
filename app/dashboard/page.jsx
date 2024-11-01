@@ -1,11 +1,13 @@
 import DashboardContent from "@/components/DashboardContent";
+import { getServerSession } from "next-auth";
 
 export default async function Page() {
 
-  const response = await fetch("http://localhost:3000/api/getLoggedInUser");
-  const user = await response.json()
-
+  const user = await getServerSession();
+  
+  
+  
   return (
-    <DashboardContent />
+    <DashboardContent user={user?.user} />
   )
 }

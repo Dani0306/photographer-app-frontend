@@ -3,9 +3,8 @@ import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-// import SessionProvider from "@/components/SessionProvider";
+import SessionWrapper from "@/components/SessionWrapper";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]";
 
 export const metadata = {
   title: "Create Next App",
@@ -14,17 +13,21 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
+  const response = await fetch("http://localhost:4000/auth/photographer/" + session?.user?.email)
+  const photographerRegistered = await response.json();
 
   return (
     <html lang="en">
       <body>
         <main className="flex flex-col overflow-x-hidden">
-                  <Providers>
-                    <Navbar session={session}/>
-                    {children}                  
-                  </Providers> 
-                <Footer/>
+          <SessionWrapper session={session}>
+            <Providers>
+                <Navbar user={session} registeredUser={photographerRegistered?.data?.user}/>
+              {children} 
+              <Footer/>
+            </Providers> 
+          </ SessionWrapper>
         </main>
         <Toaster />
       </body>

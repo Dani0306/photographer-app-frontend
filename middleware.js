@@ -4,15 +4,12 @@ export function middleware (req) {
 
     const { cookies, url, nextUrl: { pathname } } = req;
 
-    const userCookie = cookies.get("user")
-    const photographerCookie = cookies.get("photographer")
 
-
-    if(pathname.includes("/auth") && (userCookie || photographerCookie)){
+    if(pathname.includes("/auth") && cookies.get("next-auth.session-token")){
         return NextResponse.redirect(new URL("/", url))
     }
 
-    if(pathname.includes("/dashboard") && !photographerCookie){
+    if((pathname.includes("/dashboard") || pathname.includes("/profile")) && !cookies.get("next-auth.session-token")){
         return NextResponse.redirect(new URL("/", url))
     }
 
@@ -20,5 +17,5 @@ export function middleware (req) {
 
 
 export const config = {
-    matcher: ["/auth/:path*", "/dashboard/:path*"]
+    matcher: ["/auth/:path*", "/dashboard/:path*", "/profile/:path*"]
 }
