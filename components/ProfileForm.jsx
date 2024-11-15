@@ -38,11 +38,11 @@ const ProfileForm = ({ user, registeredUserData }) => {
       nombre: user.name, 
       email: user.email, 
       image_url: user.image,
-      precio_por_hora: registeredUserData.precio_por_hora, 
-      servicios: registeredUserData.servicios.join(", "), 
-      ubicacion: registeredUserData.ubicacion, 
-      redes_sociales: registeredUserData.redes_sociales.join(", "), 
-      telefono: registeredUserData.telefono
+      precio_por_hora: registeredUserData?.precio_por_hora, 
+      servicios: registeredUserData?.servicios.join(", "), 
+      ubicacion: registeredUserData?.ubicacion, 
+      redes_sociales: registeredUserData?.redes_sociales.join(", "), 
+      telefono: registeredUserData?.telefono
     }
   })
 

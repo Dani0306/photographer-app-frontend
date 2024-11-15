@@ -7,7 +7,7 @@ import { Info } from 'lucide-react';
 const Footer = () => {
 
   return (
-    <footer className='w-full mt-[100px] pb-[40px]'>
+    <footer className='w-full mt-[250px] pb-[40px]'>
         <div className="w-full flex flex-col items-center space-y-8 px-4">
           <div className='flex w-full lg:w-[80%] item-center justify-between'>
             <h3 className='text-xl font-bold lg:text-4xl'>Síguenos!</h3>

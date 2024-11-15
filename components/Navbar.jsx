@@ -7,12 +7,13 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react"
 import { IoClose } from "react-icons/io5";
+import ConditionalLink from "./ConditionalLink";
+
 
 const Navbar = ({ user, registeredUser }) => {
 
   const router = useRouter();
   const pathname = usePathname();
-
 
   const logout = () => {
     localStorage.removeItem("type")
@@ -37,7 +38,7 @@ const Navbar = ({ user, registeredUser }) => {
   }, []);
 
   useEffect(() => {
-    if(user && !registeredUser && localStorage.getItem("type") === "photographer" && pathname !== "/profile"){
+    if(typeof window !== "undefined" && user && !registeredUser && localStorage.getItem("type") === "photographer" && pathname !== "/profile"){
       const timer = setTimeout(() => {
         setShowPopup(true)
       }, 10000);
@@ -48,7 +49,7 @@ const Navbar = ({ user, registeredUser }) => {
 
 
   return (
-    <nav className="w-full mx-auto fixed left-0 top-0 h-[10vh] bg-transparent z-[100]">
+    <nav className="w-full mx-auto fixed left-0 top-0 h-[10vh] z-[100]">
 
 {
   showPopup && (
@@ -106,13 +107,15 @@ const Navbar = ({ user, registeredUser }) => {
         <ul
           className={cn(
             "hidden lg:flex w-max h-full items-center space-x-6",
-            isScrolled ? "text-white" : "text-black"
+            pathname === "/" && "text-white" || isScrolled  ? "text-white" : "text-black"
           )}
         >
           {!user?.ubicacion && (
             <>
               <li className="cursor-pointer hover:text-gray-600 transition-all duration-500">
-                Explorar Fotógrafos
+                <Link href="/searchphotographers">
+                  Explorar Fotógrafos
+                </Link>
               </li>
               <li className="cursor-pointer hover:text-gray-600 transition-all duration-500">
                 Servicios
@@ -134,19 +137,19 @@ const Navbar = ({ user, registeredUser }) => {
               <div
                 className={cn(
                   "w-[20px] h-[2px] mb-[2px] transition-[transform] border-none duration-500",
-                  isScrolled ? "bg-white" : "bg-black"
+                  pathname === "/" && "bg-white" || isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
               <div
                 className={cn(
                   "w-[20px] h-[2px] my-[2px] transition-[transform] border-none duration-500",
-                  isScrolled ? "bg-white" : "bg-black"
+                  pathname === "/" && "bg-white" || isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
               <div
                 className={cn(
                   "w-[20px] h-[2px] bg-black mt-[2px] transition-[transform] border-none translate-y-0 duration-500",
-                  isScrolled ? "bg-white" : "bg-black"
+                  pathname === "/" && "bg-white" || isScrolled ? "bg-white" : "bg-black"
                 )}
               ></div>
             </button>
@@ -156,11 +159,13 @@ const Navbar = ({ user, registeredUser }) => {
           <SheetContent className={`border-none ${isScrolled ? "bg-black text-white" : "text-black"} z-[110]`}>
             <ul className="w-full flex flex-col">
               {user && (
-                <div className="w-[90%] mx-auto flex flex-col items-end mt-10">
-                    <img src={user?.user?.image} className="w-[60px] h-[60px] rounded-full object-cover" alt="" />
-                  <strong>{user?.user?.name}</strong>
-                  <span>{localStorage.getItem("type") === "photographer" ? "Fotógrafo" : "Usuario"}</span>
-                </div>
+                <ConditionalLink condition={typeof window !== "undefined" && localStorage?.getItem("type") === "photographer"} href="/profile">
+                  <div className="w-[90%] mx-auto flex flex-col items-end mt-10">
+                      <img src={user?.user?.image} className="w-[60px] h-[60px] rounded-full object-cover" alt="" />
+                    <strong>{user?.user?.name}</strong>
+                    <span>{typeof window !== "undefined" && localStorage.getItem("type") === "photographer" ? "Fotógrafo" : "Usuario"}</span>
+                  </div>
+                </ConditionalLink>
               )}
 
               {!user?.ubicacion && (
@@ -194,11 +199,11 @@ const Navbar = ({ user, registeredUser }) => {
                 Sobre Nosotros
               </li>
               {
-                user && user?.ubicacion && <>
+                user && typeof window !== "undefined" && localStorage?.getItem("type") === "photographer" && <>
                 <Link href="/dashboard">
                   <li
                     className="w-[90%] mx-auto flex items-center justify-end pb-2 mb-4 font-medium cursor-pointer hover:text-gray-500 transition-all duration-500 border-b border-gray-400">
-                    Dasboard
+                    Dashboard
                   </li>
                 </Link>   
                 </>

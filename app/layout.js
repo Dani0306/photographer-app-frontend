@@ -23,7 +23,7 @@ export default async function RootLayout({ children }) {
         <main className="flex flex-col overflow-x-hidden">
           <SessionWrapper session={session}>
             <Providers>
-                <Navbar user={session} registeredUser={photographerRegistered?.data?.user}/>
+                <Navbar user={session} registeredUser={photographerRegistered?.user}/>
               {children} 
               <Footer/>
             </Providers> 
