@@ -53,7 +53,7 @@ const DashboardContent = ({ user }) => {
           </div>
         </div>
       </DashboardCard>
-      <DashboardCard title="Progreso" description="Visualiza el avance y progreso del tu agenda a través de la plataforma.">
+      {/* <DashboardCard title="Progreso" description="Visualiza el avance y progreso del tu agenda a través de la plataforma.">
         <div className="w-full h-max flex flex-col space-y-3">
           <div className="w-[80%] flex items-center justify-between">
             <img className="w-[60px] h-[60px] rounded-full object-cover" src="/photo3.jpg" alt="" />
@@ -74,7 +74,7 @@ const DashboardContent = ({ user }) => {
             Modificar
           </button>
         </div>
-      </DashboardCard>
+      </DashboardCard> */}
       </div>
   )
 }

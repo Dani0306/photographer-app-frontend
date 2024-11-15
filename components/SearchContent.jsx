@@ -26,7 +26,7 @@ const SearchContent = ({ photographers }) => {
         <h2 className="font-bold text-4xl mb-16 mt-6 md:text-5xl text-center lg:text-5xl xl:text-6xl">Encuentra la mejor opción</h2>
             <div className='relative mb-8'>
                 <Search className='absolute left-3 w-5 h-5 top-3'/>
-                <input onChange={(e) => setQuery(e.target.value)} value={query} placeholder='Filtra por especialidad, ciudad o nombre.' type="text" className='bg-[#d7dbdd] px-10 min-w-[350px] h-[45px] rounded-full md:w-[500px] lg:w-[650px] border-2 border-black' />
+                <input onChange={(e) => setQuery(e.target.value)} value={query} placeholder='Filtra por especialidad, ciudad, precio o nombre.' type="text" className='bg-[#d7dbdd] px-10 min-w-[350px] h-[45px] rounded-full md:w-[500px] lg:w-[650px] border-2 border-black' />
             </div>
 
             <div className='flex flex-col overflow-y-auto w-[90%] md:w-[750px]'>
